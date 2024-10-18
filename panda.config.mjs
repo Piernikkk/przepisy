@@ -37,6 +37,7 @@ export default defineConfig({
             { value: '#A1A1AA' },
             { value: '#898989' },
             { value: '#7A7A7A' },
+            { value: '#000000' },
           ],
           border: {
             value: '#ffffff10',
