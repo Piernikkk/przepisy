@@ -14,7 +14,8 @@
     "next": "14.2.15",
     "przepisy": "file:",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.46.1",
