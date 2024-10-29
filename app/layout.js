@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google';
 import "./globals.css";
+import RecipesProvider from '@/lib/providers/RecipiesProvider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        {children}
+        <RecipesProvider>
+          {children}
+        </RecipesProvider>
       </body>
     </html>
   );
