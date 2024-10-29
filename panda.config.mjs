@@ -29,8 +29,8 @@ export default defineConfig({
             value: '#000000',
           },
           tile: [
-            { value: '#121212' },
-            { value: '#242424' },
+            { value: '#0a0a0a' },
+            { value: '#181818' },
           ],
           text: [
             { value: '#E9ECEF' },
@@ -40,7 +40,7 @@ export default defineConfig({
             { value: '#000000' },
           ],
           border: {
-            value: '#ffffff10',
+            value: '#ffffff30',
           },
           gray: [
             { value: "#f5f5f5" },
