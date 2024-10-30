@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <ItemContainer recipes={recipes?.recipes} />
+      <ItemContainer recipes={recipes} dispatch={dispatch} />
 
     </div>
   );

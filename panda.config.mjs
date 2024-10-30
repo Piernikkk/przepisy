@@ -90,6 +90,9 @@ export default defineConfig({
             { value: "#c10008", },
             { value: "#a90003" }
           ],
+          yellow: [
+            { value: "#fcc419" },
+          ],
           dimmed: {
             blue: [
               { value: "#e5f4ff20", },
@@ -139,6 +142,9 @@ export default defineConfig({
               { value: "#cb840020" },
               { value: "#b0710020" },
             ],
+            yellow: [
+              { value: '#fcc41920' },
+            ]
           }
         }
       },
