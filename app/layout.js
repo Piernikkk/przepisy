@@ -1,6 +1,7 @@
 import { Poppins } from 'next/font/google';
 import "./globals.css";
 import RecipesProvider from '@/lib/providers/RecipiesProvider';
+import ModalProvider from '@/lib/providers/ModalProvider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <RecipesProvider>
-          {children}
+          <ModalProvider>
+            {children}
+
+          </ModalProvider>
         </RecipesProvider>
       </body>
     </html>
