@@ -12,7 +12,7 @@ import { useContext, useState } from "react";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('');
-  const [AddRecipeOpened, AddRecipe] = useContext(ModalContext);
+  const { AddRecipeOpened, AddRecipe } = useContext(ModalContext);
 
   const router = useRouter();
 

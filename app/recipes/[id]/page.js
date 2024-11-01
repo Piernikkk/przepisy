@@ -1,23 +1,30 @@
 'use client'
 import Text from "@/lib/components/text/Text";
 import IconTag from "@/lib/items/IconTag";
+import { ModalContext } from "@/lib/providers/ModalProvider";
 import { RecipesContext } from "@/lib/providers/RecipiesProvider";
 import { css } from "@/styled-system/css";
 import { token } from "@/styled-system/tokens";
-import { IconArrowLeft, IconClock, IconPointFilled, IconStar, IconStarFilled, IconTrash } from "@tabler/icons-react";
+import { IconArrowLeft, IconClock, IconEdit, IconPointFilled, IconStar, IconStarFilled, IconTrash } from "@tabler/icons-react";
 import { useParams, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Recipe() {
     const { recipes, dispatch } = useContext(RecipesContext);
     const router = useRouter();
     const { id } = useParams();
 
+    const { AddRecipeOpened, AddRecipe, setId } = useContext(ModalContext);
+
     const changefavourite = (id, value) => {
-        dispatch({ type: 'fav', id: id, value: value });
+        dispatch({ type: 'fav', id, value: value });
     };
 
-    const recipe = recipes?.recipes?.find((f) => f.id == id) || recipes?.recipes[0];
+    const [recipe, setRecipe] = useState();
+
+    useEffect(() => {
+        setRecipe(recipes?.recipes?.find((f) => f.id == id));
+    }, [recipes, id])
 
     return (
         <div className={container}>
@@ -26,7 +33,10 @@ export default function Recipe() {
                 <div className={info}>
                     <div className={back}>
                         <IconArrowLeft onClick={router.back} color={'#fff'} size={30} />
-                        <IconTrash color={token('colors.red.9')} size={30} onClick={() => { dispatch({ type: 'remove', id }); router.back(); }} />
+                        <div className={css({ display: 'flex', gap: '10px' })}>
+                            <IconEdit color={'#fff'} size={30} onClick={() => { setId(id); AddRecipe.open(); }} />
+                            <IconTrash color={token('colors.red.9')} size={30} onClick={() => { dispatch({ type: 'remove', id }); router.back(); }} />
+                        </div>
                     </div>
                     <Text size={'title'} >{recipe?.name}</Text>
                     <Text size={'description'} weight={400}>{recipe?.description}</Text>
@@ -34,11 +44,11 @@ export default function Recipe() {
 
                     <div className={css({ marginTop: '10px' })}></div>
                     <Text size={'subtitle'}>Składniki:</Text>
-                    {recipe.ingredients?.map((r, i) => <div className={ingredient} key={i}><IconPointFilled color="#fff" /><Text size={'tag'}>{r}</Text></div>)}
+                    {recipe?.ingredients?.map((r, i) => <div className={ingredient} key={i}><IconPointFilled color="#fff" /><Text size={'tag'}>{r}</Text></div>)}
 
                     <div className={css({ marginTop: '10px' })}></div>
                     <Text size={'subtitle'}>Sposób przygotowania:</Text>
-                    {recipe.instructions?.map((r, i) => <div className={ingredient} key={i}><IconPointFilled color="#fff" /><Text size={'tag'}>{r}</Text></div>)}
+                    {recipe?.instructions?.map((r, i) => <div className={ingredient} key={i}><IconPointFilled color="#fff" /><Text size={'tag'}>{r}</Text></div>)}
 
                     <div className={tags}>
                         <IconTag icon={recipe?.favourite ? IconStarFilled : IconStar} variants={'yellow'} onClick={() => changefavourite(id, !recipe?.favourite)} color={token('colors.yellow.0')}>{recipe?.favourite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}</IconTag>
